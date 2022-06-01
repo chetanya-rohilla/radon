@@ -1,11 +1,11 @@
 function printDate() {
     let date = new Date
-    console.log(date.getDate());
+    console.log("Today's date: " + date.getDate());
 }
 
 function printMonth() {
     let date = new Date
-    console.log(date.getMonth() + 1);
+    console.log("Today's month: " + (date.getMonth() + 1));
 }
 
 function getBatchInfo() {

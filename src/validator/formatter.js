@@ -1,16 +1,16 @@
 function trim(str) {
     str = str.trim()
-    console.log(str)
+    console.log("After trimming:" + str)
 }
 
 function changeToUpperCase(str) {
     str = str.toUpperCase()
-    console.log(str);
+    console.log("After changing to upper:" + str);
 }
 
 function changeToLowerCase(str) {
     str = str.toLowerCase()
-    console.log(str);
+    console.log("After changing to lower:" + str);
 }
 
 module.exports.trim = trim
