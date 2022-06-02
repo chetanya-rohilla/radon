@@ -1,7 +1,31 @@
 const express = require('express');
 const underscore = require('underscore')
+const lodash = require('lodash')
 
 const router = express.Router();
+
+router.get('/hello', function (req, res) {
+    let months = ["Jan", "Feb", "Mar", "Apr", "May", "Jun", "Jul", "Aug", "Sep", "Oct", "Nov", "Dec"]
+    console.log(lodash.chunk(months, 4))
+
+    let odd = [1, 3, 5, 7, 9, 11, 13, 15, 17, 19]
+    console.log(lodash.tail(odd))
+
+    let arr1 = [1,5,8]
+    let arr2 = [4,2,7, 13]
+    let arr3 = [9,14,11]
+    let arr4 = [6,3,10]
+    let arr5 = [12,15,8,2]
+    console.log(lodash.union(arr1,arr2,arr3,arr4,arr5));
+
+    let mov = [['horror','The Shining'],
+    ['drama','Titanic'],
+    ['thriller','Shutter Island'],
+    ['fantasy','Pans Labyrinth']]
+    console.log(lodash.fromPairs(mov));
+    
+    res.send("Success")
+});
 
 router.get('/movies', function (req, res) {
     let mov = ["Your Name", "A Silent Voice", "Weathering with You", "Spirited Away", "Princess Mononoke", "Wolf Children"]
