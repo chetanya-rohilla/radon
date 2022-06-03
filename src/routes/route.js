@@ -1,14 +1,8 @@
 const express = require('express');
 const router = express.Router();
+const UserController = require("../controllers/userController")
 
-router.post('/test-post', function (req, res) {
-    let arr = [12, "functionup"]
-    let ele = req.body.element
-    arr.push(ele)
-
-    console.log(req.body);
-    res.send( { msg : arr } )
-});
+router.post('/createUser', UserController.createUser);
+router.post('/getUser', UserController.getUser)
 
 module.exports = router;
-// adding this comment for no reason
