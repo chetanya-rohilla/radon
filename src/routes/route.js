@@ -83,8 +83,7 @@ router.get('/films/:filmid', function (req, res) {
             "id": 6,
             "name":  "Wolf Children"
         }]
-       
-        console.log(mov[3]);
+
     res.send(mov.find(ele => ele.id == req.params.filmid) || "No movie for this id")
 });
 
