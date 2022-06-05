@@ -8,7 +8,7 @@ app.use(bodyParser.json())
 app.use(bodyParser.urlencoded({extended : true}))
 app.use('/', route)
 
-mongoose.connect("mongodb+srv://chetanya-rohilla:chetanya@cluster0.jsshkkh.mongodb.net/Chetanya-DB")
+mongoose.connect("mongodb+srv://chetanya-rohilla:***@cluster0.jsshkkh.mongodb.net/Chetanya-DB")
 .then(() => console.log("MongoDB connected"))
 .catch((err) => console.log(err))
 
