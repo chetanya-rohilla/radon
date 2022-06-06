@@ -1,7 +1,7 @@
 const BookModel = require('../models/bookModel.js')
 
 const getBook = async function(req,res){
-    let data = await BookModel.find().select({"bookName":1, "autherName":1})
+    let data = await BookModel.find().select({"bookName":1, "autherName":1, _id:0})
     res.send({ msg : data })
 }
 
