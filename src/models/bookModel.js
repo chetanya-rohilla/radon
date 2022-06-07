@@ -10,7 +10,8 @@ const bookSchema = new mongoose.Schema( {
         indianPrice: String,
         europePrice: String,
     },
-    sales: {type: Number, default: 10}
+    sales: {type: Number, default: 10},
+    summary : mongoose.Schema.Types.Mixed
 }, { timestamps: true });
 
 
