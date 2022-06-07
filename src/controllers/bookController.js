@@ -31,10 +31,11 @@ const createBook = async function(req,res){
 
 const particularBook = async function(req,res){
     let data = req.body
-    let condition = Object.keys(data)[0]
-    let value = Object.values(data)[0]
-    console.log(condition,value);
-    let book = await BookModel.find({[condition] : value})
+    // let condition = Object.keys(data)[0]
+    // let value = Object.values(data)[0]
+    // console.log(condition,value);
+    // let book = await BookModel.find({[condition] : value})
+    let book = await BookModel.find(data)
     res.send({ msg : book })
 }
 
