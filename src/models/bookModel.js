@@ -3,21 +3,15 @@ const mongoose = require('mongoose')
 const bookSchema = new mongoose.Schema({
     "bookName" : {
         type : String,
-        required : true,
-        unique : true
+        required : true
     },
-    "autherName" : String,
-    "price" : {
-        "indianPrice" : Number,
-        "europePrice" : Number
-    },
-    "year" : {
+    "author_id" : {
         type : Number,
-        default : 2021
+        required : true,
     },
-    "tags" : [String],
-    "totalPages" : Number,
-    "stockAvailable" : Boolean
+    "price" : Number,
+    "rating" : Number
 }, { timestamps : true })
 
-module.exports = mongoose.model('Book2', bookSchema)
+
+module.exports = mongoose.model('Book4', bookSchema)
