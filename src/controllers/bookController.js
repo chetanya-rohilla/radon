@@ -15,27 +15,27 @@ const createAuthor = async function(req,res){
 
 const getBook = async function(req,res){
     let data = req.body.authorName
-    let createdBook = await AuthorModel.findOne({"authorName" : data})
-    let books = await BookModel.find({ "author_id" : createdBook.author_id})
+    let foundAuthor = await AuthorModel.findOne({"authorName" : data})
+    let books = await BookModel.find({ "author_id" : foundAuthor.author_id})
 
     res.send({ msg : books })
 }
 
 const updatePrice = async function(req,res){
     let data = req.body.bookName
-    let createdBook = await BookModel.findOneAndUpdate({ "bookName" : data}, { "price" : 200}, {new : true})
-    let author = await AuthorModel.findOne({ "author_id" : createdBook.author_id })
+    let foundBook = await BookModel.findOneAndUpdate({ "bookName" : data}, { $set:{ "price" : 150}}, {new : true})
+    let author = await AuthorModel.findOne({ "author_id" : foundBook.author_id })
 
-    res.send({ msg : [author.authorName, createdBook.price] })
+    res.send({ msg : [author.authorName, foundBook.price] })
 }
 
 const priceBooks = async function(req,res){
-    let createdBook = await BookModel.find( { price : { $gte: 50, $lte: 100} } ).select( {"author_id" : 1, _id : 0} )
+    let foundBook = await BookModel.find( { price : { $gte: 50, $lte: 100} } ).select( {"author_id" : 1, _id : 0} )
 
     let author = []
 
-    for(let i=0; i<createdBook.length ; i++){
-        let name = await AuthorModel.findOne({ "author_id" : createdBook[i].author_id })
+    for(let i=0; i< foundBook.length ; i++){
+        let name = await AuthorModel.findOne({ "author_id" : foundBook[i].author_id })
         if( !author.find(ele => ele == name.authorName ))    author.push(name.authorName)
     }
 
