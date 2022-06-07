@@ -32,16 +32,11 @@ const updatePrice = async function(req,res){
 const priceBooks = async function(req,res){
     let createdBook = await BookModel.find( { price : { $gte: 50, $lte: 100} } ).select( {"author_id" : 1, _id : 0} )
 
-    let allId = []
     let author = []
-   createdBook.forEach(ele => {
-        ele.author_id
-        if( !allId.find(ele2 => ele2 == ele.author_id) )   allId.push(ele.author_id)
-    })
 
-    for(let i=0; i<allId.length ; i++){
-        let name = await AuthorModel.findOne({ "author_id" : allId[i] })
-        author.push(name.authorName)
+    for(let i=0; i<createdBook.length ; i++){
+        let name = await AuthorModel.findOne({ "author_id" : createdBook[i].author_id })
+        if( !author.find(ele => ele == name.authorName ))    author.push(name.authorName)
     }
 
     res.send({ msg : author })
