@@ -7,6 +7,7 @@ const bookSchema = new mongoose.Schema({
         unique : true
     },
     "autherName" : String,
+    "year" : Number,
     "category" : {
         type : String,
         enum : ["horror", "action", "adventure", "comic", "mystery", "fantasy"]
