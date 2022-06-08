@@ -44,8 +44,40 @@ const priceBooks = async function(req,res){
 
 
 
+// Optional Problems
+
+const getBookAuthor = async function(req,res){
+    let data = req.body.authorName
+    let foundAuthor = await AuthorModel.findOne({"author_id" : req.params.id})
+    let books = await BookModel.find({ "author_id" : foundAuthor.author_id})
+
+    res.send({ msg : books })
+}
+
+const authorAge = async function(req,res){
+    let foundAuthor = await AuthorModel.find({"age" : { $gt : 50 }})
+    let author = []
+    let age = []
+
+    for(let i=0; i< foundAuthor.length ; i++){
+        let books = await BookModel.find({ "author_id" : foundAuthor[i].author_id})
+        books.forEach(ele => {
+            if(ele.rating > 4 && !author.find(ele => ele == foundAuthor[i].authorName )){
+                author.push(foundAuthor[i].authorName)
+                age.push(foundAuthor[i].age)
+            }
+        })
+    }
+
+    res.send({ msg : [author, age] })
+}
+
+
+
 module.exports.createBook = createBook
 module.exports.createAuthor = createAuthor
 module.exports.getBook = getBook
 module.exports.updatePrice = updatePrice
 module.exports.priceBooks = priceBooks
+module.exports.getBookAuthor = getBookAuthor
+module.exports.authorAge = authorAge
