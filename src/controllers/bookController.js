@@ -29,23 +29,33 @@ const getBooks = async function(req,res){
 }
 
 const bookUpdate = async function(req,res){
-    let books = await BookModel.find().populate(['author','publisher'])
-    let finalBooks = []
-    for (let i=0; i<books.length; i++){
-        if(books[i].publisher.name == "Penguin" || books[i].publisher.name == "HarperCollins"){
-            let updatedBook = await BookModel.updateOne({name : books[i].name}, {$set : {isHardCover : true}})
-            finalBooks.push(updatedBook)
-        }
 
-        if(books[i].author.rating > 3.5){
-            let updatedBook = await BookModel.updateOne({name : books[i].name}, {$set : {price : books[i].price + 10}})
-            finalBooks.push(updatedBook)
-        }
-    }
+    let publishers = await PublisherModel.find({name : {$in : ["Penguin", "HarperCollins"]}})
+    let updated = await BookModel.updateMany({publisher : publishers}, {$set : {"isHardCover" : true}})
+
+
+    let authors = await AuthorModel.find({rating : {$gt : 3.5}})
+    let updated2 = await BookModel.updateMany({author : authors}, {$inc : {price : 10}})
+
+
+    // let books = await BookModel.find().populate(['author','publisher'])
+    // let finalBooks = []
+    
+    // for (let i=0; i<books.length; i++){
+    //     if(books[i].publisher.name == "Penguin" || books[i].publisher.name == "HarperCollins"){
+    //         let updatedBook = await BookModel.updateOne({name : books[i].name}, {$set : {isHardCover : true}})
+    //         finalBooks.push(updatedBook)
+    //     }
+
+    //     if(books[i].author.rating > 3.5){
+    //         let updatedBook = await BookModel.updateOne({name : books[i].name}, {$set : {price : books[i].price + 10}})
+    //         finalBooks.push(updatedBook)
+    //     }
+    // }
 
     
 
-    res.send({msg : finalBooks})
+    res.send({msg : [updated,updated2]})
 }
 
 
